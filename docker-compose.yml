@@ -1,0 +1,43 @@
+version: '3'
+services:
+  db:
+    image: postgres:13.11
+    environment:
+      - POSTGRES_PASSWORD=&r1OkBP91i9f
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=app
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/itsdonatedata
+
+  app1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+    environment:
+      - PGPASSWORD=&r1OkBP91i9f
+      - PGUSER=postgres
+      - PGDATABASE=app
+      - PORT=3000
+    depends_on:
+      - db
+    command: ['npm', 'run', 'start:prod']
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - '8080:80'
+    volumes:
+      - ./infra/nginx.conf:/etc/nginx/nginx.conf
+      # - ./ssl/rootCA.pem:/etc/nginx/ssl/rootCA.pem
+      # - ./ssl/rootCA.key:/etc/nginx/ssl/rootCA.key
+    depends_on:
+      - app1
+
+volumes:
+  db_data:

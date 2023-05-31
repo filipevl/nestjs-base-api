@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { JwtService } from '@nestjs/jwt';
 
 const user = new CreateUserDto({
   cep: 'string',
@@ -38,6 +39,7 @@ describe('UsersController', () => {
             update: jest.fn().mockResolvedValue(user),
           },
         },
+        JwtService,
       ],
     }).compile();
 
@@ -60,7 +62,7 @@ describe('UsersController', () => {
 
   describe('findOne', () => {
     it('must find a user by id', async () => {
-      const result = await userController.findOne();
+      const result = await userController.findOne({ user: { id: 'some_id' } });
       expect(result).toBe(user);
       expect(usersService.findOne).toHaveBeenCalled();
     });
@@ -68,7 +70,9 @@ describe('UsersController', () => {
 
   describe('update', () => {
     it('must update a user', async () => {
-      const result = await userController.update(user);
+      const result = await userController.update(user, {
+        user: { id: 'some_id' },
+      });
       expect(result).toBe(user);
       expect(usersService.update).toHaveBeenCalled();
     });
