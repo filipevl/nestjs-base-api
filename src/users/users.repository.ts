@@ -15,6 +15,7 @@ export class UsersRepository {
     document,
   }: Partial<CreateUserDto>): Promise<string | undefined> {
     const { dbProvider, tableName } = this;
+    await dbProvider.pool.connect();
     const query = {
       name: 'findUserByEmailDocOrPhone',
       text: `SELECT id FROM "${tableName}" WHERE email = $1 OR phone = $2 OR document = $3`,

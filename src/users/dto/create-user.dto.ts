@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsDate,
@@ -22,10 +23,12 @@ export class CreateUserDto {
   @IsString()
   @Length(8, 8)
   @IsNotEmpty()
+  @ApiProperty()
   cep: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   city: string;
 
   @IsDate()
@@ -40,62 +43,78 @@ export class CreateUserDto {
       message: 'You must be greather of 18 years old',
     },
   )
+  @ApiProperty({
+    format: 'ISO Date',
+  })
   @IsNotEmpty()
   birthday: string;
 
   @IsString()
   @Length(11, 11)
   @IsNotEmpty()
+  @ApiProperty({ minimum: 11, maxLength: 11 })
   document: string;
 
   @IsEmail()
   @IsNotEmpty()
+  @ApiProperty()
   email: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   name: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   neighborhood: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   number: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   complement: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   password: string;
 
   @IsString()
   @Length(14, 14)
   @IsNotEmpty()
+  @ApiProperty()
   phone: string;
 
   @IsString()
   @Length(2, 2)
   @IsNotEmpty()
+  @ApiProperty()
   uf: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   street: string;
 
   @IsString()
   @IsNotEmpty()
+  @ApiProperty()
   userAgent: string;
 
   @IsLatitude()
   @IsNotEmpty()
+  @ApiProperty()
   latitude: number;
 
   @IsLongitude()
   @IsNotEmpty()
+  @ApiProperty()
   longitude: number;
 
   @IsDateString()

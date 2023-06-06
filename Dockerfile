@@ -6,9 +6,10 @@ WORKDIR /app
 
 # Copia os arquivos de configuração e dependências para o contêiner
 COPY package*.json ./
+COPY yarn.lock ./
 
 # Instala as dependências
-RUN npm install
+RUN yarn install
 
 # Copia o código fonte para o contêiner
 COPY . .
@@ -17,4 +18,4 @@ COPY . .
 EXPOSE 3000
 
 # Comando para iniciar a aplicação
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

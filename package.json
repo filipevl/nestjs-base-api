@@ -24,11 +24,14 @@
       "typeorm": "typeorm-ts-node-commonjs"
    },
    "dependencies": {
+      "@fastify/static": "^6.10.2",
       "@nestjs/common": "^8.0.0",
       "@nestjs/core": "^8.0.0",
       "@nestjs/jwt": "^10.0.3",
       "@nestjs/mapped-types": "*",
       "@nestjs/platform-express": "^8.0.0",
+      "@nestjs/platform-fastify": "^9.4.2",
+      "@nestjs/swagger": "^6.3.0",
       "@nestjs/typeorm": "^9.0.1",
       "bcrypt": "^5.1.0",
       "class-transformer": "^0.5.1",
