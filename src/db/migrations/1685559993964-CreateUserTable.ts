@@ -21,7 +21,7 @@ export class CreateUserTable1685559993964 implements MigrationInterface {
         "userAgent" TEXT NOT NULL,
         latitude DOUBLE PRECISION NOT NULL,
         longitude DOUBLE PRECISION NOT NULL,
-        "createdAt" DATE NOT NULL,
+        "createdAt" DATE NOT NULL DEFAULT NOW(),
         "updatedAt" DATE NULL,
         "deletedAt" DATE NULL
       )
